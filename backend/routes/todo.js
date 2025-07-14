@@ -101,12 +101,12 @@ router.delete("/:todoId", async (req, res) => {
         })
 
         // Checking to see if todo item exists
-        if (!todo) {{
+        if (!todo) {
             return res.status(404).json({
                 success: false,
                 message: "Todo item not found..",
             })
-        }}
+        }
 
         // Checking if todo item was completed
         if (!todo.completed) {
