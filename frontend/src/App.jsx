@@ -20,12 +20,17 @@ function RedirectToLogin() {
 }
 
 function App() {
+
+  
   return (
     <QueryClientProvider client={client}>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/todos" element={<MainLayout />}>
+            <Route path="/todos" element={<ProtectedRoute><Todos /></ProtectedRoute>} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
