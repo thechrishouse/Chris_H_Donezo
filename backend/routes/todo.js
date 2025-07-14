@@ -91,13 +91,39 @@ router.delete("/:todoId", async (req, res) => {
     const todoId = Number(req.params.todoId);
 
     try {
+
+        ///// Challenge - Fix query /////
+        // use prisma findUnique
+        const todo = await prisma.todo.findUnique({
+            where: {
+                id: todoId,
+            }
+        })
+
+        // Checking to see if todo item exists
+        if (!todo) {{
+            return res.status(404).json({
+                success: false,
+                message: "Todo item not found..",
+            })
+        }}
+
+        // Checking if todo item was completed
+        if (!todo.completed) {
+            return res.status(400).json({
+                success: false,
+                message: "Finish the task before deleting",
+            })
+        }
+
         // Use Prisma to delete the todo with the specified ID
+
         await prisma.todo.delete({
             where: {
                 id: todoId, // Match the todo based on its unique ID
             },
         });
-
+        
         // Respond with a success status and confirmation of the deletion
         res.status(200).json({
             success: true,
