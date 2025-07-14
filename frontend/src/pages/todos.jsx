@@ -175,6 +175,7 @@ export default function Todos() {
   return (
     <>
       <NewTodoButton />
+      <TodoItemList />
       <TodoModal />
     </>
   )
