@@ -38,6 +38,24 @@ export default function Login() {
     }
   };
 
+  function LoginAlert() {
+    return (
+      <>
+        {
+          alert.show &&
+          <div className="alert alert-error">
+            <div className="inline-flex justify-stretch items-center">
+              {alert.message}
+              <button onClick={() => showAlert({ message: "", show: false })} className="btn btn-ghost btn-circle">
+                X
+              </button>
+            </div>
+          </div>
+        }
+      </>
+    )
+  }
+
   function LoginForm() {
     return (
       <form className="space-y-4" onSubmit={handleSubmit(loginUser)}>
@@ -47,7 +65,7 @@ export default function Login() {
         </div>
         <div>
           <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-          <input id="password" type="password" className="input input-bordered w-full" { ...register("password")} />
+          <input id="password" type="password" className="input input-bordered w-full" {...register("password")} />
         </div>
         <button type="submit" className="btn btn-primary w-full">Login</button>
       </form>
